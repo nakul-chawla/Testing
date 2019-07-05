@@ -9,7 +9,7 @@ ALLOWED_EXTENSIONS = ['.pdf','.docx']
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-#app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
 
 # def allowed_file(filename):
