@@ -12,16 +12,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
 
-# def allowed_file(filename):
-
-#    ALLOWED_EXTENSIONS = ['.pdf','.docx','.png','.jpg','.jpeg','.txt']
-#    ext=os.path.splitext(filename)[1]
-#    if not ext.lower() in ALLOWED_EXTENSIONS:
-#      return False
-#    else:
-#        return True
-#    #return '.' in filename and \
-#           #filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def allowed_file(filename):
+   ext=os.path.splitext(filename)[1]
+   if not ext.lower() in ALLOWED_EXTENSIONS:
+     return False
+   else:
+       return True
 
 @app.route('/', methods=['POST'])
 def upload_file():
@@ -32,16 +28,14 @@ def upload_file():
             'Error': 'No file Part'}
 
        file = request.files['file']
-
-
-       # if user does not select file, browser also
-       # submit an empty part without filename
-       #if file.filename == '':
-           #flash('No selected file')
+       if file.filename == '':
+            res={'Response': None,
+            'Error': 'No file Selected'}
+           
 
 
 
-       if file:
+       if file and allowed_file(file.filename):
            filename = secure_filename(file.filename)
            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         #    ch=50
