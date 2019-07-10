@@ -36,8 +36,8 @@ def upload_file():
 
 
        if file and allowed_file(file.filename):
-           filename = secure_filename(file.filename)
-           file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+         filename = secure_filename(file.filename)
+         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         #    ch=50
         #    ext=os.path.splitext(filename)[1]
         #    path="uploads/user_id"+ext.lower()
@@ -56,8 +56,8 @@ def upload_file():
         #            #     res = {'Error':'No file'}
         #            #     return jsonify(res)
         #            # f.write(chunk)
-        #    # with open(path, "wb") as f:
-        #    #     f.write(file.stream.read())
+         with open(path, "wb") as f:
+            f.write(file.stream.read())
 
            res={'Response': 'Saved',
            'Error': None}
