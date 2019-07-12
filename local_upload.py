@@ -5,11 +5,11 @@ from flask import stream_with_context
 from flask import jsonify
 
 UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = ['.pdf','.docx']
+ALLOWED_EXTENSIONS = ['.pdf','.docx','.png']
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 
 
 def allowed_file(filename):
@@ -67,5 +67,5 @@ def upload_file():
 def request_entity_too_large(error):
    return "File is too large to upload"
 
-
-app.run(debug=True,host="127.0.0.1", port='8080')
+if __name__=="__main__":
+   app.run(debug=True,host="127.0.0.1", port='8080')
