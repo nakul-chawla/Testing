@@ -3,11 +3,13 @@ from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask import stream_with_context
 from flask import jsonify
+from flask_cors import CORS, cross_origin
 
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = ['.pdf','.docx','.png']
 
 app = Flask(__name__)
+cors=CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
 
@@ -19,7 +21,8 @@ def allowed_file(filename):
    else:
        return True
 
-@app.route('/', methods=['POST'])
+@app.route('/upload', methods=['POST'])
+@cross_origin(allow_headers=['Content-Type','Authorization'])
 def upload_file():
    if request.method == 'POST':
        # check if the post request has the file part
