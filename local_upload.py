@@ -6,12 +6,12 @@ from flask import jsonify
 from flask_cors import CORS, cross_origin
 
 UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = ['.pdf','.docx','.png']
+ALLOWED_EXTENSIONS = ['.pdf','.docx']
 
 app = Flask(__name__)
 cors=CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
 
 def allowed_file(filename):
@@ -71,4 +71,5 @@ def request_entity_too_large(error):
    return "File is too large to upload"
 
 if __name__=="__main__":
-   app.run(debug=True,host="127.0.0.1", port='8080')
+   app.run(debug=True,host="127.0.0.1", port='8080') 
+   #app.run(host="0.0.0.0") #in case of production and dockerizing
